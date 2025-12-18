@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franchising - Clinton Oh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #666;
+            --secondary: #2870ff;
+            --accent: #ff6b35;
+            --background: #ffffff;
+            --text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            padding-top: 80px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(40, 112, 255, 0.3);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 5rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .intro-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        .intro-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .intro-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .intro-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(40, 112, 255, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(40, 112, 255, 0.3);
+        }
+
+        .service-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--primary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: linear-gradient(135deg, #f8faff, #fff5f0);
+            border-radius: 24px;
+            padding: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(40, 112, 255, 0.3);
+        }
+
+        .process-step h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .process-step p {
+            color: var(--primary);
+            line-height: 1.8;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(255, 107, 53, 0.15);
+            border-color: var(--accent);
+        }
+
+        .benefit-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .benefit-card p {
+            color: var(--primary);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 6rem;
+        }
+
+        .cta-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--secondary);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .intro-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro-content h2 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-section {
+                padding: 2rem;
+            }
+
+            .cta-section {
+                padding: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 0.5rem;
+            }
+
+            .nav-links {
+                gap: 0.5rem;
+            }
+
+            .nav-links a {
+                padding: 0.2rem 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .page-header {
+                padding: 2rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .service-card, .benefit-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Clinton Oh</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="coaching.html">Coaching</a></li>
+            <li><a href="franchising.html" class="active">Franchising</a></li>
+            <li><a href="mymanager.html">Mymanager</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>GET YOUR BUSINESS & BRAND READY TO FRANCHISING</h1>
+        <p>Transform your successful business model into a scalable franchise opportunity with expert guidance</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <div class="intro-content">
+                <h2>Scale Your Success Through Franchising</h2>
+                <p>Franchising is one of the most powerful ways to expand your business while minimizing risk and capital investment. With proven systems and strategic guidance, we help transform your successful business model into a thriving franchise network.</p>
+                <p>Whether you're a restaurant owner, service provider, or retail business, franchising can unlock exponential growth opportunities while maintaining quality and brand consistency across all locations.</p>
+            </div>
+            <div class="intro-image">
+                <img src="https://lirp.cdn-website.com/7e69d783/dms3rep/multi/opt/Family-977w.jpg" alt="Family Business Success">
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="section">
+            <h2 class="section-title">Franchise Development Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Franchise Feasibility Analysis</h3>
+                    <p>Comprehensive evaluation of your business model to determine franchising potential, market analysis, and competitive positioning to ensure your concept is ready for expansion.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📚</div>
+                    <h3>Operations Manual Development</h3>
+                    <p>Create detailed operations manuals and training systems that ensure consistency across all franchise locations while maintaining your brand standards and quality.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>Legal Documentation</h3>
+                    <p>Work with franchise attorneys to develop Franchise Disclosure Documents (FDD), franchise agreements, and ensure compliance with all state and federal regulations.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Financial Modeling</h3>
+                    <p>Develop comprehensive financial models including initial investment requirements, ongoing fees, royalty structures, and projected returns for potential franchisees.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Marketing & Lead Generation</h3>
+                    <p>Create targeted marketing strategies to attract qualified franchise candidates, develop lead generation systems, and build your franchise sales pipeline.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Ongoing Support Systems</h3>
+                    <p>Establish comprehensive support systems for franchisees including training programs, ongoing operational support, and performance monitoring systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process-section">
+            <h2 class="section-title">Our Franchise Development Process</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h3>Business Assessment</h3>
+                    <p>We thoroughly evaluate your business model, financials, operations, and market position to determine franchising readiness and potential.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h3>System Development</h3>
+                    <p>Create comprehensive systems, processes, and documentation needed to replicate your success across multiple franchise locations.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h3>Legal Compliance</h3>
+                    <p>Ensure all legal requirements are met including FDD preparation, state registrations, and franchise agreement development.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h3>Launch & Growth</h3>
+                    <p>Execute the franchise launch strategy, attract qualified candidates, and support ongoing franchise development and expansion.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="section">
+            <h2 class="section-title">Why Choose Franchising?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Rapid Expansion</h3>
+                    <p>Scale your business faster than traditional methods with franchisees providing capital and local market expertise.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Reduced Risk</h3>
+                    <p>Franchisees invest their own capital, reducing your financial risk while expanding your brand presence.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Local Ownership</h3>
+                    <p>Franchise owners are invested in their local success, providing better customer service and community engagement.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Recurring Revenue</h3>
+                    <p>Generate ongoing royalty income and franchise fees, creating predictable revenue streams for long-term growth.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Brand Recognition</h3>
+                    <p>Achieve faster brand recognition and market penetration across multiple markets simultaneously.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Proven Systems</h3>
+                    <p>Leverage tested and proven business systems that can be replicated for consistent results across locations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Franchise Your Business?</h2>
+            <p>Take the first step toward exponential growth. Let's discuss how franchising can transform your business into a scalable empire.</p>
+            <a href="contact.html" class="cta-button">Schedule Your Consultation</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="coaching.html">Coaching</a>
+                <a href="franchising.html">Franchising</a>
+                <a href="mymanager.html">Mymanager</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2024 Clinton Oh. All rights reserved.</p>
+            <p>Entrepreneur - Consultant - Investor</p>
+        </div>
+    </footer>
+</body>
+</html>
