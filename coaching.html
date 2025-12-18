@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching - Clinton Oh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #666;
+            --secondary: #2870ff;
+            --accent: #ff6b35;
+            --background: #ffffff;
+            --text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            padding-top: 80px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(102, 102, 102, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            margin: 3px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 120px 5% 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--text), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .coach-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .coach-intro-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .coach-intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .coach-image {
+            text-align: center;
+        }
+
+        .coach-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .coach-image img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .program-card {
+            background: var(--background);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(102, 102, 102, 0.1);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .program-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .program-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .program-card p {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .program-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-features li {
+            padding: 0.5rem 0;
+            color: var(--primary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .program-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(40, 112, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(40, 112, 255, 0.2);
+        }
+
+        .testimonials {
+            background: linear-gradient(135deg, #f8f9ff, #fff5f3);
+            padding: 80px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--text), var(--secondary));
+            padding: 80px 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 60px 5% 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .coach-intro {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 100px 5% 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .program-card {
+                padding: 1.5rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Clinton Oh</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="coaching.html" class="active">Coaching</a></li>
+            <li><a href="franchising.html">Franchising</a></li>
+            <li><a href="mymanager.html">Mymanager</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+        </ul>
+        <div class="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Personal Coaching</h1>
+        <p>Transform your business and personal life with personalized guidance from Clinton Oh</p>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="coach-intro">
+                <div class="coach-intro-text">
+                    <h3>Meet Your Coach</h3>
+                    <p>Meet Clinton, a seasoned entrepreneur and CEO of multiple franchise companies. Through his company, Next Level Media, he leverages modern technology to revolutionize business operations and foster growth.</p>
+                    <p>His personal coaching program, Be Aligned, blends vast experience with custom technology for unparalleled results in personal and business success. Renowned for problem-solving, Clinton's extensive network ensures success in overcoming hurdles.</p>
+                    <p>A committed philanthropist, he supports children worldwide through his nonprofit, Operation Child Rescue. Ready to elevate your business? Clinton and his team are here to help.</p>
+                </div>
+                <div class="coach-image">
+                    <img src="https://lirp.cdn-website.com/7e69d783/dms3rep/multi/opt/clinton2-1920w.png" alt="Clinton Oh - Business Coach">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Coaching Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">🚀</div>
+                    <h3>Business Acceleration</h3>
+                    <p>Accelerate your business growth with proven strategies and frameworks that have helped scale multiple franchise operations.</p>
+                    <ul class="program-features">
+                        <li>Strategic business planning</li>
+                        <li>Revenue optimization</li>
+                        <li>Operational efficiency</li>
+                        <li>Team development</li>
+                        <li>Technology integration</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">⚡</div>
+                    <h3>Be Aligned Program</h3>
+                    <p>Clinton's signature coaching program that combines personal development with business strategy for holistic success.</p>
+                    <ul class="program-features">
+                        <li>Personal alignment assessment</li>
+                        <li>Custom success roadmap</li>
+                        <li>Technology-powered tracking</li>
+                        <li>Weekly coaching sessions</li>
+                        <li>Access to Clinton's network</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Learn More</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">💡</div>
+                    <h3>Executive Leadership</h3>
+                    <p>Develop exceptional leadership skills and build high-performing teams that drive sustainable business growth.</p>
+                    <ul class="program-features">
+                        <li>Leadership assessment</li>
+                        <li>Communication mastery</li>
+                        <li>Team building strategies</li>
+                        <li>Decision-making frameworks</li>
+                        <li>Conflict resolution</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Apply Now</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">📈</div>
+                    <h3>Startup Success</h3>
+                    <p>Transform your startup idea into a thriving business with guidance from someone who's built multiple successful companies.</p>
+                    <ul class="program-features">
+                        <li>Business model validation</li>
+                        <li>Fundraising strategies</li>
+                        <li>Market positioning</li>
+                        <li>Growth hacking techniques</li>
+                        <li>Investor connections</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Start Journey</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">🔧</div>
+                    <h3>Tech Integration</h3>
+                    <p>Leverage modern technology to streamline operations and scale your business efficiently with custom solutions.</p>
+                    <ul class="program-features">
+                        <li>Technology audit</li>
+                        <li>CRM implementation</li>
+                        <li>Marketing automation</li>
+                        <li>Process optimization</li>
+                        <li>MyManager platform access</li>
+                    </ul>
+                    <a href="mymanager.html" class="btn-outline">Explore Tech</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">🎯</div>
+                    <h3>Franchise Mastery</h3>
+                    <p>Learn the ins and outs of franchise business from someone who's successfully built and managed multiple franchise operations.</p>
+                    <ul class="program-features">
+                        <li>Franchise evaluation</li>
+                        <li>Investment strategies</li>
+                        <li>Operations management</li>
+                        <li>Multi-unit expansion</li>
+                        <li>Exit planning</li>
+                    </ul>
+                    <a href="franchising.html" class="btn-outline">View Franchises</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Clinton's coaching transformed my approach to business. The Be Aligned program helped me align my personal values with business goals, resulting in 300% revenue growth in just 18 months."</p>
+                    <div class="testimonial-author">- Sarah Johnson, CEO of TechStart Solutions</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Working with Clinton was a game-changer. His strategic insights and network connections helped us scale from a single location to 15 franchises across three states."</p>
+                    <div class="testimonial-author">- Michael Chen, Franchise Owner</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Clinton's technology integration strategies revolutionized our operations. The MyManager platform he introduced saved us 20+ hours per week and increased customer satisfaction by 40%."</p>
+                    <div class="testimonial-author">- Lisa Rodriguez, Operations Director</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Join hundreds of entrepreneurs who have already transformed their businesses with Clinton's guidance</p>
+        <a href="contact.html" class="btn" style="background: white; color: var(--secondary); margin-right: 1rem;">Schedule Consultation</a>
+        <a href="contact.html" class="btn-outline" style="border-color: white; color: white;">Get More Info</a>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Clinton Oh</h4>
+                <p>Entrepreneur - Consultant - Investor</p>
+                <p>Empowering businesses through strategic coaching, franchise opportunities, and innovative technology solutions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <p><a href="coaching.html">Personal Coaching</a></p>
+                <p><a href="franchising.html">Franchise Opportunities</a></p>
+                <p><a href="mymanager.html">MyManager CRM</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p><a href="contact.html">Contact Us</a></p>
+                <p><a href="mailto:info@clintonoh.com">info@clintonoh.com</a></p>
+                <p><a href="tel:+1234567890">+1 (234) 567-8900</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Clinton Oh. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
